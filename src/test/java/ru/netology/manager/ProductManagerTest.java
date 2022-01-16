@@ -12,11 +12,11 @@ class ProductManagerTest {
     private ProductRepository repository = new ProductRepository();
     private ProductManager manager = new ProductManager(repository);
 
-    private Book bookOne = new Book(1, "Ведьмак: Последнее желание", 420, "Сапковский А.");
-    private Book bookTwo = new Book(2, "Гиперион", 420, "Симмонс Д.");
-    private Book bookThree = new Book(3, "Ампир V", 390, "Пелевин В.");
-    private Book bookFour = new Book(4, "Ведьмак: Башня Ласточки", 420, "Сапковский А.");
-    private Book bookFive = new Book(5, "Inside Apple", 420, "Лашински А.");
+    Book bookOne = new Book(1, "Ведьмак: Последнее желание", 420, "Сапковский А.");
+    Book bookTwo = new Book(2, "Гиперион", 420, "Симмонс Д.");
+    Book bookThree = new Book(3, "Ампир V", 390, "Пелевин В.");
+    Book bookFour = new Book(4, "Ведьмак: Башня Ласточки", 420, "Сапковский А.");
+    Book bookFive = new Book(5, "Inside Apple", 420, "Лашински А.");
 
     private SmartPhone smartPhoneOne = new SmartPhone(6, "Mi 9T Pro", 26000, "Xiaomi");
     private SmartPhone smartPhoneTwo = new SmartPhone(7, "Mi 11T Pro", 32500, "Xiaomi");
@@ -31,6 +31,7 @@ class ProductManagerTest {
         manager.add(bookTwo);
         manager.add(bookThree);
         manager.add(bookFour);
+        manager.add(smartPhoneThree);
 
         Product[] actual = manager.searchBy("Ведьмак");
         Product[] expected = {bookOne, bookFour};
@@ -120,17 +121,67 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
 
+    /// Тесты для методов matches
+
     @Test
-    void noSearchByObject() {
-        manager.add(smartPhoneOne);
-        manager.add(smartPhoneTwo);
-        manager.add(bookOne);
-        manager.add(bookTwo);
-        manager.add(certificate);
+    void shouldSearchBookIfThereAreMatch() {
+        Book book = bookThree;
 
-        Product[] actual = manager.searchBy("Сертификат");
-        Product[] expected = {};
+        boolean actual = book.matches("Ампир");
+        boolean expected = true;
 
-        assertArrayEquals(expected, actual);
+        assertEquals(expected, actual);
     }
+
+    @Test
+    void shouldSearchBookIfThereAreNotMatch() {
+        Book book = bookThree;
+
+        boolean actual = book.matches("Сапковский");
+        boolean expected = false;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSearchSmartPhoneIfThereAreMatch() {
+        SmartPhone phone = smartPhoneOne;
+
+        boolean actual = phone.matches("Pro");
+        boolean expected = true;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSearchSmartPhoneIfThereAreNotMatch() {
+        SmartPhone phone = smartPhoneOne;
+
+        boolean actual = phone.matches("Nokia");
+        boolean expected = false;
+
+        assertEquals(expected, actual);
+    }
+
+//    @Test
+//    void shouldSearchProductIfThereAreMatch(){
+//        Product product = certificate;
+//
+//        boolean actual = product.matches("Сертификат");
+//        boolean expected = true;
+//
+//        assertEquals(expected,actual);
+//    }
+
+//    @Test
+//    void shouldSearchProductIfThereAreNotMatch(){
+//        Product product = certificate;
+//
+//        boolean actual = product.matches("Автомобиль");
+//        boolean expected = false;
+//
+//        assertEquals(expected,actual);
+//    }
+
+
 }

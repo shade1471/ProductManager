@@ -14,16 +14,16 @@ public class Product {
     public Product() {
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
@@ -37,4 +37,12 @@ public class Product {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public boolean matches(String search) {
+        if (getName().contains(search)) {
+            return true;
+        }
+        return false;
+    }
+
 }
