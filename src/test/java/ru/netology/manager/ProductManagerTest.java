@@ -109,7 +109,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void searchByAll() {
+    void searchWithoutValue() {
         manager.add(smartPhoneOne);
         manager.add(smartPhoneTwo);
         manager.add(bookOne);
@@ -117,6 +117,19 @@ class ProductManagerTest {
 
         Product[] actual = manager.searchBy("");
         Product[] expected = {smartPhoneOne, smartPhoneTwo, bookOne, bookTwo};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void searchForSequenceOfValuesValues() {
+        manager.add(smartPhoneOne);
+        manager.add(smartPhoneTwo);
+        manager.add(bookOne);
+        manager.add(bookTwo);
+
+        Product[] actual = manager.searchBy("MI PRO");
+        Product[] expected = {};
 
         assertArrayEquals(expected, actual);
     }
