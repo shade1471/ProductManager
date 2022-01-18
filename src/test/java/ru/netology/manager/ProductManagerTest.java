@@ -68,7 +68,6 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
 
-
     @Test
     void searchPhoneByName() {
         manager.add(smartPhoneOne);
@@ -122,7 +121,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void searchForSequenceOfValuesValues() {
+    void searchForSequenceOfValues() {
         manager.add(smartPhoneOne);
         manager.add(smartPhoneTwo);
         manager.add(bookOne);
@@ -132,48 +131,6 @@ class ProductManagerTest {
         Product[] expected = {};
 
         assertArrayEquals(expected, actual);
-    }
-
-    /// Тесты для методов matches
-
-    @Test
-    void shouldSearchBookIfThereAreMatch() {
-        Book book = bookThree;
-
-        boolean actual = book.matches("Ампир");
-        boolean expected = true;
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void shouldSearchBookIfThereAreNotMatch() {
-        Book book = bookThree;
-
-        boolean actual = book.matches("Сапковский");
-        boolean expected = false;
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void shouldSearchSmartPhoneIfThereAreMatch() {
-        SmartPhone phone = smartPhoneOne;
-
-        boolean actual = phone.matches("Pro");
-        boolean expected = true;
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void shouldSearchSmartPhoneIfThereAreNotMatch() {
-        SmartPhone phone = smartPhoneOne;
-
-        boolean actual = phone.matches("Nokia");
-        boolean expected = false;
-
-        assertEquals(expected, actual);
     }
 
 //    @Test
